@@ -5,6 +5,7 @@ MySQL分库分表演示
 ### sharding-jdbc-read-write
 MySQL读写分离
 
+参考文档：https://shardingsphere.apache.org/document/legacy/4.x/document/cn/manual/sharding-jdbc/configuration/config-spring-boot/#读写分离
 ```shell script
 root@ubuntu18:~# cat master.cnf
 [mysqld]
