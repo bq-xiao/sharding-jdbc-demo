@@ -5,7 +5,6 @@
 	<modules>
 		<module>sharding-jdbc-sharding-data</module>
 		<module>sharding-jdbc-read-write</module>
-		<module>sharding-jdbc-common</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -41,11 +40,6 @@
 				<artifactId>json-lib</artifactId>
 				<version>2.4</version>
 				<classifier>jdk15</classifier>
-			</dependency>
-			<dependency>
-				<groupId>com.sharding.jdbc</groupId>
-				<artifactId>sharding-jdbc-common</artifactId>
-				<version>0.0.1</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

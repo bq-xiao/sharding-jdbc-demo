@@ -1,7 +1,7 @@
 package com.sharding.jdbc.read.write.service;
 
-import com.sharding.jdbc.common.dao.OrderRepository;
-import com.sharding.jdbc.common.entity.OrderEntity;
+import com.sharding.jdbc.read.write.dao.OrderRepository;
+import com.sharding.jdbc.read.write.entity.OrderEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

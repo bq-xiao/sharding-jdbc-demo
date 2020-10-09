@@ -1,6 +1,6 @@
 package com.sharding.jdbc.read.write;
 
-import com.sharding.jdbc.common.entity.OrderEntity;
+import com.sharding.jdbc.read.write.entity.OrderEntity;
 import com.sharding.jdbc.read.write.service.ShardingReadWriteService;
 import net.sf.json.JSONArray;
 import org.junit.Test;

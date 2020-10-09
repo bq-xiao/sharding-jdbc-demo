@@ -1,4 +1,4 @@
-package com.sharding.jdbc.common.entity;
+package com.sharding.jdbc.sharding.data.entity;
 
 import lombok.Data;
 
