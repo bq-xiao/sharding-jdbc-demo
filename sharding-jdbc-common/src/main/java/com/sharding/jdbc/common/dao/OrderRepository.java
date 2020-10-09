@@ -1,6 +1,6 @@
-package com.sharding.jdbc.sharding.data.dao;
+package com.sharding.jdbc.common.dao;
 
-import com.sharding.jdbc.sharding.data.entity.OrderEntity;
+import com.sharding.jdbc.common.entity.OrderEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

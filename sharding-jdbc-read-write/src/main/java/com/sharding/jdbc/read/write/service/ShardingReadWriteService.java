@@ -1,4 +1,4 @@
-package com.sharding.jdbc.sharding.data.service;
+package com.sharding.jdbc.read.write.service;
 
 import com.sharding.jdbc.common.dao.OrderRepository;
 import com.sharding.jdbc.common.entity.OrderEntity;
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class ShardingDataService {
+public class ShardingReadWriteService {
     @Autowired
     private OrderRepository orderRepository;
 

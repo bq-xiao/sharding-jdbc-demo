@@ -1,7 +1,7 @@
-package com.sharding.jdbc.sharding.data;
+package com.sharding.jdbc.read.write;
 
 import com.sharding.jdbc.common.entity.OrderEntity;
-import com.sharding.jdbc.sharding.data.service.ShardingDataService;
+import com.sharding.jdbc.read.write.service.ShardingReadWriteService;
 import net.sf.json.JSONArray;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,21 +13,21 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ShardingJDBCDataTest {
+public class ShardingReadWriteTest {
     @Autowired
-    private ShardingDataService shardingDataService;
+    private ShardingReadWriteService shardingReadWriteService;
 
     @Test
     public void save() {
         for (int i = 0; i < 100; i++) {
-            shardingDataService.save(i);
+            shardingReadWriteService.save(i);
         }
         System.out.println("save done!");
     }
 
     @Test
     public void list() {
-        List<OrderEntity> list = shardingDataService.list();
+        List<OrderEntity> list = shardingReadWriteService.list();
         System.out.println(JSONArray.fromObject(list));
         System.out.println("total count:" + list.size());
     }
