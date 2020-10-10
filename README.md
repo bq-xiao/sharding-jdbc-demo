@@ -27,6 +27,19 @@ relay_log         = mysql-relay-bin
 log_slave_updates = 1
 read_only         = 1
 ```
+**分别启动两个数据库**
+```shell script
+root@ubuntu18:~# docker run --name master -p 3310:3306 -e MYSQL_ROOT_PASSWORD=root -d mysql:master
+d34d8767560b3f08e3eb4205ac80388456c546dde524c9c2707496f22e9c5523
+
+root@ubuntu18:~# docker run --link master:master --name slave -p 3320:3306 -e MYSQL_ROOT_PASSWORD=root -d mysql:slave
+664857039ab3a933ff7b12be50be36244ea14712d6dc2b495c815510acef7844
+
+root@ubuntu18:~# docker ps -a
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                               NAMES
+664857039ab3        mysql:slave         "docker-entrypoint.s…"   5 seconds ago       Up 4 seconds        33060/tcp, 0.0.0.0:3320->3306/tcp   slave
+d34d8767560b        mysql:master        "docker-entrypoint.s…"   39 seconds ago      Up 38 seconds       33060/tcp, 0.0.0.0:3310->3306/tcp   master
+```
 **Master数据库配置：**
 ```shell script
 mysql> create user 'repl'@'%' identified by 'repl-pwd';
