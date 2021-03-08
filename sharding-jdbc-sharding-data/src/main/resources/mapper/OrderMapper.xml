@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sharding.jdbc.sharding.data.dao.IOrderMapper">
+    <select id="findAll" resultType="com.sharding.jdbc.sharding.data.entity.OrderEntity">
+        select order_id, order_name, order_date from t_order;
+    </select>
+    
+    <insert id="save" parameterType="com.sharding.jdbc.sharding.data.entity.OrderEntity">
+        insert into t_order(order_id, order_name, order_date) values(#{order_id}, #{order_name}, #{order_date})
+    </insert>
+</mapper>

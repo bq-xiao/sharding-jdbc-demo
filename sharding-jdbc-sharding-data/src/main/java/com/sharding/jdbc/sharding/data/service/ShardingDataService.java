@@ -1,6 +1,6 @@
 package com.sharding.jdbc.sharding.data.service;
 
-import com.sharding.jdbc.sharding.data.dao.OrderRepository;
+import com.sharding.jdbc.sharding.data.dao.IOrderRepository;
 import com.sharding.jdbc.sharding.data.entity.OrderEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import java.util.UUID;
 @Service
 public class ShardingDataService {
     @Autowired
-    private OrderRepository orderRepository;
+    private IOrderRepository orderRepository;
 
     public void save(int i) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
