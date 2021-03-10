@@ -6,6 +6,7 @@
         <result property="orderId" column="order_id"/>
         <result property="skuName" column="sku_name"/>
         <result property="unitName" column="unit_name"/>
+        <result property="regionName" column="region_name"/>
     </resultMap>
     <select id="findAll" resultType="com.sharding.jdbc.sharding.data.entity.OrderEntity">
         select order_id, order_name, order_date from t_sale_order_item
@@ -13,6 +14,14 @@
 
     <select id="query" parameterType="java.util.List" resultMap="result">
         select * from t_sale_order_item where id in
+        <foreach collection="orderEntity" item="o" open="( " separator=") or (" close=" )">
+            #{o.id}
+        </foreach>
+    </select>
+
+    <select id="joinQuery" parameterType="java.util.List" resultMap="result">
+        select soi.id, soi.order_id, soi.sku_name, soi.unit_name, so.region_name as region_name from t_sale_order so
+        left join t_sale_order_item soi on so.order_id = soi.order_id where id in
         <foreach collection="orderEntity" item="o" open="( " separator=") or (" close=" )">
             #{o.id}
         </foreach>

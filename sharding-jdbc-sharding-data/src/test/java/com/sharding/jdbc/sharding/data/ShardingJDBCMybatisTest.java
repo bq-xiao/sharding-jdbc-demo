@@ -55,6 +55,21 @@ public class ShardingJDBCMybatisTest {
     }
 
     @Test
+    public void joinQuery() {
+        List<OrderEntity> list = new ArrayList<>();
+        OrderEntity orderEntity = new OrderEntity();
+        orderEntity.setId("100000000227934208");
+        orderEntity.setSkuName("test");
+        list.add(orderEntity);
+        HintManager hintManager = HintManager.getInstance();
+        hintManager.addTableShardingValue("t_sale_order_item", "D210308002642");
+        hintManager.addTableShardingValue("t_sale_order_item", "D210508002642");
+        List<OrderEntity> result = iOrderMapper.joinQuery(list);
+        System.out.println(JSONArray.fromObject(result));
+        System.out.println("total count:" + result.size());
+    }
+
+    @Test
     public void batch() throws InterruptedException {
         CountDownLatch countDownLatch = new CountDownLatch(1);
         String arr[] = {"D210308002641", "D210408002642", "D210508002643", "D210608002644"};

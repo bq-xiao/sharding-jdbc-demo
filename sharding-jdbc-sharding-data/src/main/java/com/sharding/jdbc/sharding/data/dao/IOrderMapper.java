@@ -13,5 +13,7 @@ public interface IOrderMapper {
 
     List<OrderEntity> query(List<OrderEntity> orderEntity);
 
+    List<OrderEntity> joinQuery(List<OrderEntity> orderEntity);
+
     List<OrderEntity> findAll();
 }

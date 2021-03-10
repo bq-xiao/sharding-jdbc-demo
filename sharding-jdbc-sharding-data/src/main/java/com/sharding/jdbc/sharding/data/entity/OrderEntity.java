@@ -19,4 +19,6 @@ public class OrderEntity {
     private String skuName;
     @Column(name = "unit_name")
     private String unitName;
+    @Column(name = "region_name")
+    private String regionName;
 }
