@@ -18,9 +18,9 @@ public class ShardingDataService {
     public void save(int i) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         OrderEntity orderEntity = new OrderEntity();
-        orderEntity.setId(i);
-        orderEntity.setName(UUID.randomUUID().toString());
-        orderEntity.setDate(sdf.format(new Date()));
+        orderEntity.setId(i + "");
+        orderEntity.setSkuName(UUID.randomUUID().toString());
+        orderEntity.setUnitName(sdf.format(new Date()));
         orderRepository.save(orderEntity);
     }
 

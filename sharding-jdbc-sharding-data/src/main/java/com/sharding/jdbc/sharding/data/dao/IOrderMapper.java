@@ -11,5 +11,7 @@ import java.util.List;
 public interface IOrderMapper {
     void save(OrderEntity orderEntity);
 
+    List<OrderEntity> query(List<OrderEntity> orderEntity);
+
     List<OrderEntity> findAll();
 }

@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sharding.jdbc.sharding.data.dao.IOrderMapper">
+    <resultMap id="result" type="com.sharding.jdbc.sharding.data.entity.OrderEntity">
+        <id property="id" column="id"/>
+        <result property="orderId" column="order_id"/>
+        <result property="skuName" column="sku_name"/>
+        <result property="unitName" column="unit_name"/>
+    </resultMap>
     <select id="findAll" resultType="com.sharding.jdbc.sharding.data.entity.OrderEntity">
-        select order_id, order_name, order_date from t_order;
+        select order_id, order_name, order_date from t_sale_order_item
     </select>
-    
+
+    <select id="query" parameterType="java.util.List" resultMap="result">
+        select * from t_sale_order_item where id in
+        <foreach collection="orderEntity" item="o" open="( " separator=") or (" close=" )">
+            #{o.id}
+        </foreach>
+    </select>
+
     <insert id="save" parameterType="com.sharding.jdbc.sharding.data.entity.OrderEntity">
-        insert into t_order(order_id, order_name, order_date) values(#{order_id}, #{order_name}, #{order_date})
+        insert into t_sale_order_item(order_id, order_name, order_date) values(#{id}, #{name}, #{date})
     </insert>
 </mapper>
