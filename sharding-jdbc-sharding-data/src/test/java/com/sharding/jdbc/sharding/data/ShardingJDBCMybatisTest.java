@@ -2,6 +2,7 @@ package com.sharding.jdbc.sharding.data;
 
 import com.sharding.jdbc.sharding.data.dao.IOrderMapper;
 import com.sharding.jdbc.sharding.data.entity.OrderEntity;
+import lombok.extern.slf4j.Slf4j;
 import net.sf.json.JSONArray;
 import org.apache.shardingsphere.api.hint.HintManager;
 import org.junit.Test;
@@ -16,6 +17,7 @@ import java.util.concurrent.CountDownLatch;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Slf4j
 public class ShardingJDBCMybatisTest {
     @Autowired
     private IOrderMapper iOrderMapper;
@@ -61,9 +63,13 @@ public class ShardingJDBCMybatisTest {
         orderEntity.setId("100000000227934208");
         orderEntity.setSkuName("test");
         list.add(orderEntity);
-        HintManager hintManager = HintManager.getInstance();
-        hintManager.addTableShardingValue("t_sale_order_item", "D210308002642");
-        hintManager.addTableShardingValue("t_sale_order_item", "D210508002642");
+        try (HintManager hintManager = HintManager.getInstance()) {
+            hintManager.addTableShardingValue("t_sale_order_item", "D210308002642");
+            hintManager.addTableShardingValue("t_sale_order_item", "D210508002642");
+            //hintManager.close();
+        } catch (Exception e) {
+            log.error("HintManager:", e);
+        }
         List<OrderEntity> result = iOrderMapper.joinQuery(list);
         System.out.println(JSONArray.fromObject(result));
         System.out.println("total count:" + result.size());
@@ -85,10 +91,15 @@ public class ShardingJDBCMybatisTest {
                     orderEntity.setId("10000000027310489" + String.valueOf(index));
                     list.add(orderEntity);
                     int j = rand.nextInt(4);
-                    HintManager hintManager = HintManager.getInstance();
+                    //HintManager hintManager = HintManager.getInstance();
                     Thread.currentThread().setName("T" + index + "");
                     System.out.println("=====T" + index + "=======" + arr[j]);
-                    hintManager.addTableShardingValue("t_sale_order_item", arr[j]);
+                    //hintManager.addTableShardingValue("t_sale_order_item", arr[j]);
+                    try (HintManager hintManager = HintManager.getInstance()) {
+                        hintManager.addTableShardingValue("t_sale_order_item", arr[j]);
+                    } catch (Exception e) {
+                        log.error("setShardingValue:", e);
+                    }
                     List<OrderEntity> result = iOrderMapper.query(list);
 //                    System.out.println(JSONArray.fromObject(result));
 //                    System.out.println("total count:" + JSON.toJSONString(result));

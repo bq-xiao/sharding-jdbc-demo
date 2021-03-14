@@ -12,10 +12,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -48,5 +49,17 @@ public class ShardingJDBCDataTest {
         try (PreparedStatement preparedStatement = shardingDataSource.getConnection().prepareStatement(SELECT_SQL_WITH_PARAMETER_MARKER)) {
             preparedStatement.executeQuery();
         }
+    }
+
+    @Test
+    public void stream() {
+        List<String> list = new ArrayList<>();
+        list.add("a");
+        list.add("a");
+        list.add("b");
+        list.add("b");
+        list.add("c");
+        list = list.stream().distinct().collect(Collectors.toList());
+        assertTrue(list.size() == 3);
     }
 }
