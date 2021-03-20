@@ -1,7 +1,10 @@
 package com.sharding.jdbc.sharding.data.service;
 
+import com.sharding.jdbc.sharding.data.annotation.ShardingData;
+import com.sharding.jdbc.sharding.data.annotation.ShardingDataParam;
 import com.sharding.jdbc.sharding.data.dao.IOrderRepository;
 import com.sharding.jdbc.sharding.data.entity.OrderEntity;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 @Service
 public class ShardingDataService {
     @Autowired
@@ -26,5 +30,11 @@ public class ShardingDataService {
 
     public List<OrderEntity> list() {
         return orderRepository.findAll();
+    }
+
+    @ShardingData
+    public String other(@ShardingDataParam("other") String str) {
+        log.info("==========exec other=============");
+        return "hello";
     }
 }
