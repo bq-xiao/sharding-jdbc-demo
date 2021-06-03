@@ -19,6 +19,14 @@
         </foreach>
     </select>
 
+    <select id="get" parameterType="java.lang.String" resultMap="result">
+        select * from t_sale_order_item where region_code = #{regionCode}
+    </select>
+
+    <select id="defaultTable" parameterType="java.lang.String" resultType="hashmap">
+        select * from t_concat_template where id = #{id}
+    </select>
+
     <select id="joinQuery" parameterType="java.util.List" resultMap="result">
         select soi.id, soi.order_id, soi.sku_name, soi.unit_name, so.region_name as region_name from t_sale_order so
         left join t_sale_order_item soi on so.order_id = soi.order_id where id in
