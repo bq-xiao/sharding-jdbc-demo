@@ -15,7 +15,8 @@ import java.util.List;
 public class SimpleCanalClientExample {
     public static void main(String args[]) {
         // 创建链接
-        CanalConnector connector = CanalConnectors.newSingleConnector(new InetSocketAddress("192.168.159.131",
+        CanalConnector connector = CanalConnectors.newSingleConnector(new InetSocketAddress(
+                "192.168.159.132",
                 11111), "example", "", "");
         int batchSize = 1000;
         int emptyCount = 0;
@@ -59,6 +60,7 @@ public class SimpleCanalClientExample {
             RowChange rowChage = null;
             try {
                 rowChage = RowChange.parseFrom(entry.getStoreValue());
+                System.out.println(rowChage.getEventType() + "+++++sql+++" + rowChage.getSql());
             } catch (Exception e) {
                 throw new RuntimeException("ERROR ## parser of eromanga-event has an error , data:" + entry.toString(),
                         e);
