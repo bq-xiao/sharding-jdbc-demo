@@ -6,16 +6,16 @@ spring:
       master:
         type: com.alibaba.druid.pool.DruidDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://10.0.0.8:3310/ds
-        username: root
-        password: root
+        url: jdbc:mysql://10.220.147.181:33306/gaia_order
+        username: gaiadev
+        password: shuhai0987
 
       slave:
         type: com.alibaba.druid.pool.DruidDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://10.0.0.8:3320/ds
-        username: root
-        password: root
+        url: jdbc:mysql://10.220.147.181:33306/gaia_order
+        username: gaiadev
+        password: shuhai0987
 
     masterslave:
       load-balance-algorithm-type: round_robin
@@ -25,6 +25,11 @@ spring:
     props:
       sql:
         show: true
+  data:
+    elasticsearch:
+      cluster-name: my-application
+      cluster-nodes: 172.22.227.95:9300
+
 management:
   health:
     db:
